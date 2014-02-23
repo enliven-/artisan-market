@@ -27,13 +27,6 @@ ActiveRecord::Schema.define(version: 20140223145548) do
     t.datetime "updated_at"
   end
 
-  create_table "catalogs", force: true do |t|
-    t.string   "label"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "palettes", force: true do |t|
     t.string   "label"
     t.integer  "user_id"
@@ -45,14 +38,6 @@ ActiveRecord::Schema.define(version: 20140223145548) do
 
   create_table "product_categories", force: true do |t|
     t.string   "label"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "products", force: true do |t|
-    t.string   "label"
-    t.text     "description"
-    t.integer  "product_category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
