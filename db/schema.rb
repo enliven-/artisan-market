@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140223153911) do
+ActiveRecord::Schema.define(version: 20140223165242) do
 
   create_table "attribute_layers", force: true do |t|
     t.string   "label"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20140223153911) do
     t.string   "label"
     t.integer  "user_id"
     t.integer  "project_id"
-    t.integer  "prodct_category_id"
+    t.integer  "product_category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

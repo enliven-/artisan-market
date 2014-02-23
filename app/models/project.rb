@@ -1,11 +1,25 @@
 class Project < ActiveRecord::Base
 
-  validates   :label, presence: true
+  validates   :label,   presence: true
+  validates   :artisan_id, presence: true
+  validates   :product_category_id, presence: true
 
-  belongs_to  :user
-  has_one     :product_category
+  belongs_to  :artisan,   class_name: 'User'
+  belongs_to  :customer,  class_name: 'User'
+
+  belongs_to  :product_category
   has_many    :palettes
 
-  amoeba { enable }
+  amoeba do
+    enable
+    set show_in_catalog: false
+  end
+
+  def clone
+    proj_clone = self.amoeba_dup 
+    proj_clone.update_attributes(customer_id: 2, parent_project_id: self.id)
+    proj_clone.save!
+    proj_clone
+  end
 
 end
