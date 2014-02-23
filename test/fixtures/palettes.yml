@@ -4,10 +4,10 @@ one:
   label: MyString
   user_id: 1
   project_id: 1
-  prodct_category_id: 1
+  product_category_id: 1
 
 two:
   label: MyString
   user_id: 1
   project_id: 1
-  prodct_category_id: 1
+  product_category_id: 1

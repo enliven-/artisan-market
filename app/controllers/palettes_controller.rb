@@ -69,6 +69,6 @@ class PalettesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def palette_params
-      params.require(:palette).permit(:label, :user_id, :project_id, :prodct_category_id)
+      params.require(:palette).permit(:label, :user_id, :project_id, :product_category_id)
     end
 end

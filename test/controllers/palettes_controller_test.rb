@@ -18,7 +18,7 @@ class PalettesControllerTest < ActionController::TestCase
 
   test "should create palette" do
     assert_difference('Palette.count') do
-      post :create, palette: { label: @palette.label, prodct_category_id: @palette.prodct_category_id, project_id: @palette.project_id, user_id: @palette.user_id }
+      post :create, palette: { label: @palette.label, product_category_id: @palette.product_category_id, project_id: @palette.project_id, user_id: @palette.user_id }
     end
 
     assert_redirected_to palette_path(assigns(:palette))
@@ -35,7 +35,7 @@ class PalettesControllerTest < ActionController::TestCase
   end
 
   test "should update palette" do
-    patch :update, id: @palette, palette: { label: @palette.label, prodct_category_id: @palette.prodct_category_id, project_id: @palette.project_id, user_id: @palette.user_id }
+    patch :update, id: @palette, palette: { label: @palette.label, product_category_id: @palette.product_category_id, project_id: @palette.project_id, user_id: @palette.user_id }
     assert_redirected_to palette_path(assigns(:palette))
   end
 

@@ -4,7 +4,7 @@ class CreatePalettes < ActiveRecord::Migration
       t.string :label
       t.integer :user_id
       t.integer :project_id
-      t.integer :prodct_category_id
+      t.integer :product_category_id
 
       t.timestamps
     end

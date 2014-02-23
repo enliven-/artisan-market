@@ -6,4 +6,6 @@ class Project < ActiveRecord::Base
   has_one     :product_category
   has_many    :palettes
 
+  amoeba { enable }
+
 end
