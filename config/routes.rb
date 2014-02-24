@@ -1,9 +1,14 @@
 ArtisanMarket::Application.routes.draw do
-  
 
   devise_for :users
 
-  resources :projects
+  resources :projects do
+    resources :design_versions do
+  end
+
+  resources comment_threads do
+    resources comments
+  end
 
 
   resources :palettes do
