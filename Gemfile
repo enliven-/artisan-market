@@ -51,3 +51,5 @@ gem 'simple_form'
 gem 'devise'
 
 gem 'amoeba'
+
+gem 'paperclip'

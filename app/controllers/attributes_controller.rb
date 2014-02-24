@@ -69,6 +69,6 @@ class AttributesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def attribute_params
-      params.require(:attribute).permit(:label, :attribute_layer_id)
+      params.require(:attribute).permit(:label, :image, :attribute_layer_id)
     end
 end

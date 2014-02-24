@@ -69,6 +69,6 @@ class DesignVersionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def design_version_params
-      params.require(:design_version).permit(:project_id, :html)
+      params.require(:design_version).permit(:project_id, :image, :html)
     end
 end
