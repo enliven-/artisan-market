@@ -1,6 +1,6 @@
 <h1>Listing attributes</h1>
 
-<table>
+<table class="table table-bordered table-striped table-hover">
   <thead>
     <tr>
       <th>Label</th>
@@ -15,7 +15,7 @@
     <% @attributes.each do |attribute| %>
       <tr>
         <td><%= attribute.label %></td>
-        <td><%= attribute.attribute_layer_id %></td>
+        <td><%= attribute.attribute_layer.label %></td>
         <td><%= link_to 'Show', attribute %></td>
         <td><%= link_to 'Edit', edit_attribute_path(attribute) %></td>
         <td><%= link_to 'Destroy', attribute, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -24,8 +24,10 @@ class PalettesController < ApplicationController
   # POST /palettes
   # POST /palettes.json
   def create
-    @palette = Palette.new(palette_params)
-
+    @palette              = Palette.new(palette_params)
+    @palette.user         = current_user
+    @project.project_id   = current_project
+    
     respond_to do |format|
       if @palette.save
         format.html { redirect_to @palette, notice: 'Palette was successfully created.' }

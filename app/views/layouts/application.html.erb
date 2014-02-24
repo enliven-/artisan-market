@@ -8,7 +8,8 @@
 </head>
 <body>
 
-<div class="navbar navbar-default navbar-fixed-top">
+  <!-- top navbar -->
+  <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <a href="../" class="navbar-brand">Bootswatch</a>
@@ -66,9 +67,20 @@
 
         </div>
       </div>
+  </div>
+
+  
+  <!-- main container -->
+  <div class="row container">
+
+    <div class="left col-lg-2">      
+    </div>
+    
+    <div class="right col-lg-10">
+      <%= yield %>      
     </div>
 
-<%= yield %>
+  </div>
 
 </body>
 </html>
