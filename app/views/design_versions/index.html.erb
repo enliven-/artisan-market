@@ -16,9 +16,9 @@
       <tr>
         <td><%= design_version.project_id %></td>
         <td><%= design_version.html %></td>
-        <td><%= link_to 'Show', design_version %></td>
-        <td><%= link_to 'Edit', edit_design_version_path(design_version) %></td>
-        <td><%= link_to 'Destroy', design_version, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', project_design_version_path(@project) %></td>
+        <td><%= link_to 'Edit', edit_project_design_version_path(@project, design_version) %></td>
+        <td><%= link_to 'Destroy', project_design_version_path(@project, design_version), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Design version', new_design_version_path %>
+<%= link_to 'New Design version', new_project_design_version_path(@project) %>

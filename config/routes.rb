@@ -3,7 +3,7 @@ ArtisanMarket::Application.routes.draw do
   devise_for :users
 
   resources :projects do
-    resources :design_versions do
+    resources :design_versions
   end
 
   resources :comment_threads do

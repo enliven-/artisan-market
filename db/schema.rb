@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140223165242) do
+ActiveRecord::Schema.define(version: 20140224150146) do
 
   create_table "attribute_layers", force: true do |t|
     t.string   "label"
@@ -25,6 +25,37 @@ ActiveRecord::Schema.define(version: 20140223165242) do
     t.integer  "attribute_layer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  create_table "comment_threads", force: true do |t|
+    t.float    "pin_x"
+    t.float    "pin_y"
+    t.integer  "design_version_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", force: true do |t|
+    t.integer  "user_id"
+    t.text     "text"
+    t.integer  "comment_thread_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "design_versions", force: true do |t|
+    t.integer  "project_id"
+    t.text     "html"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "palettes", force: true do |t|
@@ -46,7 +77,7 @@ ActiveRecord::Schema.define(version: 20140223165242) do
     t.string   "label"
     t.text     "description"
     t.integer  "artisan_id"
-    t.integer  "design_versions_count"
+    t.integer  "design_versions_count", default: 0
     t.integer  "parent_project_id"
     t.boolean  "show_in_catalog"
     t.integer  "product_category_id"
