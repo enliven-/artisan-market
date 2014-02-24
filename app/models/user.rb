@@ -13,5 +13,10 @@ class User < ActiveRecord::Base
 
   has_many  :projects
   has_many  :palettes
-    
+
+  def projects
+    Project.where("artisan_id=? or customer_id=?", self.id, self.id)
+  end
+
 end
+

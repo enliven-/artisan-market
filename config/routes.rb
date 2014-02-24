@@ -1,20 +1,25 @@
 ArtisanMarket::Application.routes.draw do
-  resources :palettes
+  
 
-  resources :attributes
-
-  resources :attribute_layers
-
-  resources :product_categories
+  devise_for :users
 
   resources :projects
 
-  devise_for :users
+
+  resources :palettes do
+    resources :attribute_layers do
+      resources :attributes
+    end
+  end
+
+  resources :product_categories
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'projects#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
