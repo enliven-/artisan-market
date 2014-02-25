@@ -10,5 +10,8 @@
   <%= @design_version.html %>
 </p>
 
-<%= link_to 'Edit', edit_design_version_path(@design_version) %> |
-<%= link_to 'Back', design_versions_path %>
+<p> <%= image_tag @design_version.image.url %> </p>
+<p> <%= image_tag @design_version.image.url(:thumb) %> </p>
+
+<%#= link_to 'Edit', edit_design_version_path(@design_version) %> |
+<%#= link_to 'Back', design_versions_path %>

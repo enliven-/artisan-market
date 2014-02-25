@@ -53,3 +53,5 @@ gem 'devise'
 gem 'amoeba'
 
 gem 'paperclip'
+
+gem 'rmagick'

@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 20140224150146) do
     t.string   "label"
     t.text     "description"
     t.integer  "artisan_id"
-    t.integer  "design_versions_count", default: 0
+    t.integer  "design_versions_count"
     t.integer  "parent_project_id"
     t.boolean  "show_in_catalog"
     t.integer  "product_category_id"
