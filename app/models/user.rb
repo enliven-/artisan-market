@@ -8,8 +8,8 @@ class User < ActiveRecord::Base
   
   validates :role, presence: true
 
-  scope     :artisan,   ->  { where(state: 0) }
-  scope     :customer,  ->  { where(state: 1) }
+  scope     :artisan,   ->  { where(role: 0) }
+  scope     :customer,  ->  { where(role: 1) }
 
   has_many  :projects
   has_many  :palettes
@@ -19,4 +19,3 @@ class User < ActiveRecord::Base
   end
 
 end
-

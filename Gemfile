@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.1.0'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.3'
 
@@ -44,7 +46,10 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'bootstrap-sass'
+# gem 'bootstrap-sass'
+gem 'foundation-rails'
+
+gem 'rails_layout', group: :development 
 
 gem 'simple_form'
 
