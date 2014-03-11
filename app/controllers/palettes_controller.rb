@@ -26,7 +26,7 @@ class PalettesController < ApplicationController
   def create
     @palette              = Palette.new(palette_params)
     @palette.user         = current_user
-    @project.project_id   = current_project
+    # @project.project_id   = current_project
     
     respond_to do |format|
       if @palette.save
