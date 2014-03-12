@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :design]
   
   # GET /projects
   # GET /projects.json
@@ -60,6 +60,13 @@ class ProjectsController < ApplicationController
       format.html { redirect_to projects_url }
       format.json { head :no_content }
     end
+  end
+
+
+  def design
+    @design_version     = @project.design_versions.last
+    @palette            = @project.palettes.first
+    @attribute_layers   = @palette.attribute_layers
   end
 
   private

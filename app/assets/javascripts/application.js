@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require foundation
+//= require jquery_ui
 //= require_tree .
 $(function() {
   $(document).foundation();

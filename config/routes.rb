@@ -2,8 +2,13 @@ ArtisanMarket::Application.routes.draw do
 
 
   devise_for :users
+
   resources :projects do
     resources :design_versions
+
+    member do
+      get  :design
+    end
   end
 
   resources :comment_threads do

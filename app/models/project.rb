@@ -9,6 +9,7 @@ class Project < ActiveRecord::Base
 
   belongs_to  :product_category
   has_many    :palettes
+  has_many    :design_versions
 
   amoeba do
     enable
