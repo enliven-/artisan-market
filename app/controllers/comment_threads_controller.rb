@@ -14,7 +14,12 @@ class CommentThreadsController < ApplicationController
 
   # GET /comment_threads/new
   def new
-    @comment_thread = CommentThread.new
+    @design_version_id  = params['design_version_id']
+    @comment_thread     = CommentThread.new
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   # GET /comment_threads/1/edit

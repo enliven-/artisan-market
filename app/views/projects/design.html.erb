@@ -7,12 +7,12 @@
 
     <% @attribute_layers.each do |attr_layer| %>    
     <div class="medium-block-grid-3 bordered layer hidden" id="<%= attr_layer.id %>">
-      <img src="http://placehold.it/60x60"> 
-      <img src="http://placehold.it/60x60"> 
-      <img src="http://placehold.it/60x60">
-      <img src="http://placehold.it/60x60"> 
-      <img src="http://placehold.it/60x60"> 
-      <img src="http://placehold.it/60x60">
+      <img class="img-thm" src="http://placehold.it/60x60"> 
+      <img class="img-thm" src="http://placehold.it/60x60"> 
+      <img class="img-thm" src="http://placehold.it/60x60">
+      <img class="img-thm" src="http://placehold.it/60x60"> 
+      <img class="img-thm" src="http://placehold.it/60x60"> 
+      <img class="img-thm" src="http://placehold.it/60x60">
       <%= attr_layer.id %>
     </div>
     <% end %>
@@ -37,15 +37,15 @@
       </ul>
       
       <ul class="button-group">
-        <li><a href="#" class="tiny button success">Save Vers.</a></li>
+        <li><a href="#" class="tiny button success" id="save">Save Vers.</a></li>
       </ul>
     
     </div>
 
     <div class="row" id="design-container">
     
-      <div class="medium-centered medium-9 columns bordered" id="design">
-        <img src="http://placehold.it/600x600">
+      <div class="medium-centered medium-9 columns unselectable bordered" id="design">
+        <img src="http://placehold.it/600x600">...
       </div>
  
     </div>
@@ -60,16 +60,55 @@
 
 $(document).ready(function() {
 
+  var user = "viksit"
+  ,   role = "customer";
+
+  $(".img-thm").draggable( { helper: "clone" } )
+              
+  $("img")
+          .css ( { 'opacity' : 0.7, 'zIndex': 10 } )
+          // .data( { 'originalLeft': $("img").css('left'), 'origionalTop': $("img").css('top') } );
+
+
+  // var des_vers_id = parseInt("<%#= @design_version.id %>");
+  var des_vers_id = 1;
+
+  $("#design-container").on("dblclick", "#design", function(e) {
+    console.log("dblclick");
+    $.ajax({
+      params:   { 'design_version_id': des_vers_id },
+      url:      "/comment_threads/new"
+    });
+  });
+
+  $("#save").on("click", function(e) {
+    console.log("saving!")
+    $(".comment-thread").each(function() {
+      $comment_thread = $(this);
+      console.log($comment_thread.attr("id"));
+    });
+  });
+
+
   $("#layer-select").on("change", function() {
     var self        = $("layer-select");
     var layer_id    = this.options[this.selectedIndex].value;
     var $sel_layer   = $("#"+layer_id);
     $(".layer").addClass("hidden");
-    $sel_layer.removeClass("hidden");    
+    $sel_layer.removeClass("hidden");
   });
 
+  $("#design-container").droppable({
+    drop: function(event, ui) {
+            // var $image = $(ui.helper);
+            // if ($image.hasClass("dropped-img-thm")) { return false; }
+            $image_clone = $image.clone().removeClass("img-thm").addClass("dropped-img-thm");
+            // $("#design-container").append($image_clone);
+          }
+  });
 
 });
+
 </script>
 
 
@@ -102,7 +141,17 @@ $(document).ready(function() {
   padding: 4px;
 }
 
-body > div > div > div > div.medium-9.columns.bordered > div.button-bar.controls.bordered > ul > li > a {
-  margin: 5px;
+#controls > ul > li > a {
+  /*margin: 5px;*/
+  color: #fff;
 }
+
+.unselectable {
+   -moz-user-select     : none;
+   -khtml-user-select   : none;
+   -webkit-user-select  : none;
+   -o-user-select       : none;
+   user-select          : none;
+}
+
 </style>
