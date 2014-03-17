@@ -14,7 +14,7 @@ class CommentThreadsController < ApplicationController
 
   # GET /comment_threads/new
   def new
-    @design_version_id  = params['design_version_id']
+    @design_version_id  = session[:design_version_id]
     @comment_thread     = CommentThread.new
     respond_to do |format|
       format.js
@@ -33,6 +33,7 @@ class CommentThreadsController < ApplicationController
 
     respond_to do |format|
       if @comment_thread.save
+        format.js
         format.html { redirect_to @comment_thread, notice: 'Comment thread was successfully created.' }
         format.json { render action: 'show', status: :created, location: @comment_thread }
       else

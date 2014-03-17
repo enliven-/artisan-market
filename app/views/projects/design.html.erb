@@ -24,20 +24,20 @@
     <div class="button-bar bordered" id="controls">
 
       <ul class="button-group">
-        <li><a href="#" class="tiny button">&#60; Prev Vers.</a></li>
-        <li><a href="#" class="tiny button">Next Vers. &#62;</a></li>
+        <li><a class="tiny button">&#60; Prev Vers.</a></li>
+        <li><a class="tiny button">Next Vers. &#62;</a></li>
       </ul>
       
       <ul class="button-group">
-        <li><a href="#" class="tiny button">Remove Img</a></li>
+        <li><a class="tiny button">Remove Img</a></li>
       </ul>
 
       <ul class="button-group">
-        <li><a href="#" class="tiny button alert">Reset</a></li>
+        <li><a class="tiny button alert">Reset</a></li>
       </ul>
       
       <ul class="button-group">
-        <li><a href="#" class="tiny button success" id="save">Save Vers.</a></li>
+        <li><a class="tiny button success" id="save">Save Vers.</a></li>
       </ul>
     
     </div>
@@ -63,51 +63,65 @@ $(document).ready(function() {
   var user = "viksit"
   ,   role = "customer";
 
-  $(".img-thm").draggable( { helper: "clone" } )
+  $("#design-container")
+                    .on("dblclick", "#design", function(e) {
+                      console.log("dblclick");
+                      params = { 'comment_thread': { 'pin_x': 23, 'pin_y': 35, 'design_version_id': 1 } };
+
+                      $.ajax({
+                        url     : "/comment_threads/", 
+                        method  : "POST",
+                        data    : params
+                      });
+                    })
+
+                    .on("click", ".pin", function(e) {
+                      var sel_pin_id_int          = parse_id_int($(e.target));
+                      var sel_comment_thread_id   = "#comment-thread-" + sel_pin_id_int;
+
+                      $(".comment-thread").addClass("hidden");
+                      $(sel_comment_thread_id).removeClass("hidden")
+                                              .find("textarea").focus();
+                    })
+
+  $("#controls")
+          .on("click", "#save", function(e) {
+            $(".unsaved").each(function(i, ct) {
               
-  $("img")
-          .css ( { 'opacity' : 0.7, 'zIndex': 10 } )
-          // .data( { 'originalLeft': $("img").css('left'), 'origionalTop': $("img").css('top') } );
+              var ct_id   = parse_id_int($(ct).attr("id"));
+              var pin_y   = $("#pin-"+ct_id).css("left");
+              var pin_x   = $("#pin-"+ct_id).css("top");
 
+              $(".new", $(ct)).each(function(j, c) {
+                var new_comment = $(c).find(".text").text();
+                params = { 'comment': { 'text': new_comment, 'comment_thread_id': ct_id, 'user_id': 1 } };
+                $.ajax({
+                  url       : "/comment_threads/" + ct_id + "/comments/",
+                  method    : "POST",
+                  data      : params,
+                });
+              })
 
-  // var des_vers_id = parseInt("<%#= @design_version.id %>");
-  var des_vers_id = 1;
+              .ajax({
+                url         : "/comment_threads/"+ct_id,
+                method      : "PUT",
+                params      : { 'commen_thread' : { 'pin_x': pin_x, 'pin_y': pin_y } }
+              })
 
-  $("#design-container").on("dblclick", "#design", function(e) {
-    console.log("dblclick");
-    $.ajax({
-      params:   { 'design_version_id': des_vers_id },
-      url:      "/comment_threads/new"
-    });
-  });
+              .ajax({
+                url         : "/design_versions/"+1,
+                method      : "PUT",
+                params      : { 'commen_thread' : { 'pin_x': pin_x, 'pin_y': pin_y } }                
+              })
 
-  $("#save").on("click", function(e) {
-    console.log("saving!")
-    $(".comment-thread").each(function() {
-      $comment_thread = $(this);
-      console.log($comment_thread.attr("id"));
-    });
-  });
+            });
+          });
 
-
-  $("#layer-select").on("change", function() {
-    var self        = $("layer-select");
-    var layer_id    = this.options[this.selectedIndex].value;
-    var $sel_layer   = $("#"+layer_id);
-    $(".layer").addClass("hidden");
-    $sel_layer.removeClass("hidden");
-  });
-
-  $("#design-container").droppable({
-    drop: function(event, ui) {
-            // var $image = $(ui.helper);
-            // if ($image.hasClass("dropped-img-thm")) { return false; }
-            $image_clone = $image.clone().removeClass("img-thm").addClass("dropped-img-thm");
-            // $("#design-container").append($image_clone);
-          }
-  });
-
+  var count        = 0;                  
+  var parse_id_int = function(str)  { return parseInt(str.split("-")[2]); };
+  var get_count    = function()     { count += 1; console.log("get_count" + count); return count; }
 });
+
 
 </script>
 

@@ -64,7 +64,13 @@ class ProjectsController < ApplicationController
 
 
   def design
-    @design_version     = @project.design_versions.last
+    @design_version_id  = lambda { 
+                            design_version = @project.design_versions.last
+                            if design_version.nil? then 0
+                            else design_version.id end
+                          }.call
+
+    session[:design_version_id] = @design_version_id
     @palette            = @project.palettes.first
     @attribute_layers   = @palette.attribute_layers
   end

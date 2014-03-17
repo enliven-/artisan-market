@@ -1,0 +1,64 @@
+console.log("rendering create js erb");
+
+var count  = "<%= @comment_thread.id %>"
+var user   = "<%= current_user.email %>";
+
+var $pin = $("<img/>", {"src":          "/defaultpin.png",
+                       "class":         "pin",
+                       "id":            "pin-"+count,
+                       "title":         count,
+                       "data-toggle":   "tooltip",
+                       "data-placement":"right"
+                      });
+
+var $comment_thread = $("<%= escape_javascript(render 'comment_thread') %>");
+
+$comment_thread
+              .attr("id", "comment-thread-"+count)
+              
+              .on("keypress", "textarea", function(e) {
+                var code = e.keyCode? e.keyCode : e.which;
+                if (code==13) { 
+                  e.preventDefault();
+                  var comment         = $(this).val();
+                  var comment_history = $(this).parent().find(".comment-history");
+                  if (comment.trim()!="") {
+                    var new_comment_line = $("<span class='comment new'><span class='user'>" + user  + "</span> : <span class='text'>" + comment + "<br /></span></span>");
+                    comment_history.append(new_comment_line);
+                  }
+                  $(this).val("").focus();
+                }
+              })
+
+              .find("textarea").droppable({
+                
+                over:   function(e, ui) {
+                  console.log("over")
+                },
+
+                out:    function(e, ui) {
+                  console.log("out")
+                },
+                
+                accept: function(e, ui) {
+                  console.log("accept")
+                },
+
+                drop:   function(e, ui) {
+                  console.log("drop")
+                },
+
+                snap:       true,
+                greedy:     true,
+                tolerance:  "pointer"
+
+              })
+
+$comment_thread.addClass("unsaved")
+
+
+$("#design-container")
+        .append($pin)
+        .append($comment_thread);
+
+console.log("heretoo")
