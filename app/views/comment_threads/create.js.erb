@@ -25,6 +25,7 @@ $comment_thread
                   if (comment.trim()!="") {
                     var new_comment_line = $("<span class='comment new'><span class='user'>" + user  + "</span> : <span class='text'>" + comment + "<br /></span></span>");
                     comment_history.append(new_comment_line);
+                    $("#save").removeClass("disabled");
                   }
                   $(this).val("").focus();
                 }
@@ -54,11 +55,11 @@ $comment_thread
 
               })
 
-$comment_thread.addClass("unsaved")
-
 
 $("#design-container")
         .append($pin)
         .append($comment_thread);
+$comment_thread
+            .addClass("unsaved")
+            .find("textarea").focus();
 
-console.log("heretoo")

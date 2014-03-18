@@ -61,7 +61,8 @@
 $(document).ready(function() {
 
   var user = "viksit"
-  ,   role = "customer";
+  ,   role = "customer"
+  ,   dvid = 1;
 
   $("#design-container")
                     .on("dblclick", "#design", function(e) {
@@ -86,6 +87,7 @@ $(document).ready(function() {
 
   $("#controls")
           .on("click", "#save", function(e) {
+
             $(".unsaved").each(function(i, ct) {
               
               var ct_id   = parse_id_int($(ct).attr("id"));
@@ -99,22 +101,28 @@ $(document).ready(function() {
                   url       : "/comment_threads/" + ct_id + "/comments/",
                   method    : "POST",
                   data      : params,
+                  success   : function() { $(c).removeClass("new"); }
                 });
               })
 
-              .ajax({
+              $.ajax({
                 url         : "/comment_threads/"+ct_id,
                 method      : "PUT",
-                params      : { 'commen_thread' : { 'pin_x': pin_x, 'pin_y': pin_y } }
-              })
-
-              .ajax({
-                url         : "/design_versions/"+1,
-                method      : "PUT",
-                params      : { 'commen_thread' : { 'pin_x': pin_x, 'pin_y': pin_y } }                
-              })
-
+                data        : { 'comment_thread' : { 'pin_x': pin_x, 'pin_y': pin_y, 'design_version_id': dvid } },
+                success     : function() { $(ct).removeClass("unsaved"); }
+              });
             });
+
+            $.ajax({
+              url         : "design_versions/",
+              method      : "POST",
+              data        : { 'design_version' : { 'project_id': 1 } },
+              success     : function() { 
+                              dvid = "<%= session[:design_version_id] %>";
+                              $("#save").addClass("disabled");
+                            }
+            });
+
           });
 
   var count        = 0;                  

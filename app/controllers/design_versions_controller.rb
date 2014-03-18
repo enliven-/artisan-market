@@ -29,6 +29,8 @@ class DesignVersionsController < ApplicationController
 
     respond_to do |format|
       if @design_version.save
+        session[:design_version_id] = @design_version.id
+        format.js   { render nothing: true }
         format.html { redirect_to @design_version, notice: 'Design version was successfully created.' }
         format.json { render action: 'show', status: :created, location: @design_version }
       else

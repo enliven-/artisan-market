@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20140224150146) do
   create_table "design_versions", force: true do |t|
     t.integer  "project_id"
     t.text     "html"
+    t.integer  "comment_thread_count", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image_file_name"
