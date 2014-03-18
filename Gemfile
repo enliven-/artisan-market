@@ -63,3 +63,5 @@ gem 'amoeba'
 gem 'paperclip'
 
 gem 'rmagick'
+
+gem 'rails_12factor', group: :production
