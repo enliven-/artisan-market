@@ -18,4 +18,8 @@ class User < ActiveRecord::Base
     Project.where("artisan_id=? or customer_id=?", self.id, self.id)
   end
 
+  def role_type
+    self.role == 0 ? 'artisan' : 'customer'
+  end
+
 end
