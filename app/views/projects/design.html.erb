@@ -7,12 +7,12 @@
 
     <% @attribute_layers.each do |attr_layer| %>    
     <div class="medium-block-grid-3 bordered layer hidden" id="<%= attr_layer.id %>">
-      <img class="img-thm" src="http://placehold.it/60x60"> 
-      <img class="img-thm" src="http://placehold.it/60x60"> 
-      <img class="img-thm" src="http://placehold.it/60x60">
-      <img class="img-thm" src="http://placehold.it/60x60"> 
-      <img class="img-thm" src="http://placehold.it/60x60"> 
-      <img class="img-thm" src="http://placehold.it/60x60">
+      <img class="img-thm original" src="http://placehold.it/60x60"> 
+      <img class="img-thm original" src="http://placehold.it/60x60"> 
+      <img class="img-thm original" src="http://placehold.it/60x60">
+      <img class="img-thm original" src="http://placehold.it/60x60"> 
+      <img class="img-thm original" src="http://placehold.it/60x60"> 
+      <img class="img-thm original" src="http://placehold.it/60x60">
       <%= attr_layer.id %>
     </div>
     <% end %>
@@ -86,7 +86,7 @@ $(document).ready(function() {
                       $(".comment-thread").addClass("hidden");
                       $(sel_comment_thread_id).removeClass("hidden")
                                               .find("textarea").focus();
-                    })
+                    });
 
   $("#controls")
           .on("click", "#save", function(e) {
@@ -114,7 +114,10 @@ $(document).ready(function() {
                 data        : { 'comment_thread' : { 'pin_x': pin_x, 'pin_y': pin_y, 'design_version_id': dvid } },
                 success     : function() { $(ct).removeClass("unsaved"); }
               });
+
             });
+
+
 
             $.ajax({
               url         : "design_versions/",
@@ -148,6 +151,23 @@ $(document).ready(function() {
   var count        = 0;                  
   var parse_id_int = function(str)  { return parseInt(str.split("-")[2]); };
   var get_count    = function()     { count += 1; console.log("get_count" + count); return count; }
+
+
+  $(".img-thm").draggable({
+    helper  : "clone",
+  });
+
+
+  $("#design-container").droppable({
+    drop: function( event, ui ) {
+            if ( $(ui.draggable).hasClass("original") ) {
+              $( ui.draggable ).clone().removeClass("original").addClass("copy").appendTo("#design-container").draggable({containment: "#design-container"});
+            }
+          }
+  });
+
+
+
 });
 
 
