@@ -65,9 +65,12 @@ $(document).ready(function() {
   ,   dvid = 1;
 
   $("#design-container")
-                    .on("dblclick", "#design", function(e) {
+                    .on("dblclick", function(e) {
+                      var offset = $(this).offset();
+                      var x = Math.round(e.clientX - offset.left) - 10;
+                      var y = Math.round(e.clientY - offset.top) + 23;
                       console.log("dblclick");
-                      params = { 'comment_thread': { 'pin_x': 23, 'pin_y': 35, 'design_version_id': 1 } };
+                      params = { 'comment_thread': { 'pin_x': x, 'pin_y': y, 'design_version_id': 1 } };
 
                       $.ajax({
                         url     : "/comment_threads/", 

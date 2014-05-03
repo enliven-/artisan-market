@@ -1,5 +1,8 @@
 console.log("rendering create js erb");
 
+var pinx   = "<%= @comment_thread.pin_x %>";
+var piny   = "<%= @comment_thread.pin_y %>";
+
 var count  = "<%= @comment_thread.id %>";
 var user   = "<%= current_user.email %>";
 var type   = "<%= current_user.role_type %>";
@@ -9,8 +12,12 @@ var $pin = $("<img/>", {"src":          "/defaultpin.png",
                        "id":            "pin-"+count,
                        "title":         count,
                        "data-toggle":   "tooltip",
-                       "data-placement":"right"
+                       "data-placement":"right",
                       });
+
+$pin.css("position", "absolute");
+// alert(pinx);
+$pin.css({top: piny+"px", left: pinx+"px"});
 
 var $comment_thread = $("<%= escape_javascript(render 'comment_thread') %>");
 
@@ -27,8 +34,10 @@ $comment_thread
                     var new_comment_line = $("<span class='comment new'><span class="+type+">" + user  + "</span></span> : <span class='text'>" + comment + "<br /></span></span>");
                     comment_history.append(new_comment_line);
                     $("#save").removeClass("disabled");
-                    objDiv.scrollTop = objDiv.scrollHeight;
+                    console.log(comment_history);
                   }
+                  $comment_history = comment_history[0];
+                  $comment_history.scrollTop = $comment_history.scrollHeight;
                   $(this).val("").focus();
                 }
               })
