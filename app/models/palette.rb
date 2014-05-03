@@ -1,6 +1,6 @@
 class Palette < ActiveRecord::Base
 
-  belongs_to  :product_category
+  has_one     :product_category
   belongs_to  :user
   belongs_to  :project
   has_many    :attribute_layers

@@ -27,6 +27,7 @@ $comment_thread
                     var new_comment_line = $("<span class='comment new'><span class="+type+">" + user  + "</span></span> : <span class='text'>" + comment + "<br /></span></span>");
                     comment_history.append(new_comment_line);
                     $("#save").removeClass("disabled");
+                    objDiv.scrollTop = objDiv.scrollHeight;
                   }
                   $(this).val("").focus();
                 }
@@ -67,3 +68,4 @@ $comment_thread
 
 $comment_thread
             .find("span.number").html(count)
+
